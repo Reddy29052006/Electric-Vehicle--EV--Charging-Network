@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EV Charging Network | OOPs Case Study Presentation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="logo"><i class="fas fa-bolt"></i> EV Charging Network | OOPs Case Study</div>
+      <ul class="nav-links">
+        <li><a href="#home">Cover</a></li>
+        <li><a href="#part1">Part 1</a></li>
+        <li><a href="#part2">Part 2</a></li>
+        <li><a href="#part3">Part 3</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="slides-container">
+    <section id="home" class="slide hero">
+      <div class="hero-content">
+        <h1>ELECTRIC VEHICLE (EV) CHARGING NETWORK SYSTEM</h1>
+        <p>A Real-Time Case Study Solved Using Object Oriented Programming Concepts with JAVA</p>
+        <a href="#part1" class="btn">START PRESENTATION <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <section id="part1" class="slide section">
+      <h2 class="section-title">PART 1 : PROBLEM STATEMENT, CLASSES &amp; OBJECTS, ENCAPSULATION &amp; COLLECTIONS</h2>
+      <div class="part-grid">
+        <div class="part-card">
+          <h3><i class="fas fa-exclamation-circle"></i> 1.1 REAL-TIME PROBLEM STATEMENT</h3>
+          <ul>
+            <li>Rapid growth of EV's leads to unorganized charging infrastructure.</li>
+            <li>Issues like long queues, double-booking of connectors &amp; no proper billing.</li>
+            <li><strong>Need:</strong> A system to manage, book, monitor &amp; bill EV charging in an organized way.
+            </li>
+            <li><strong>Solution:</strong> EV Charging Network System using Java OOPs.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-cubes"></i> 1.2 CLASSES &amp; OBJECTS</h3>
+          <ul>
+            <li><strong>Class</strong> - Blueprint (e.g., <code>ChargingStation</code>)</li>
+            <li><strong>Object</strong> - Real instance created in <code>Main.java</code></li>
+            <li>We created objects like <code>station1</code>, <code>fastStation1</code> to perform actions.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-lock"></i> 1.3 ENCAPSULATION</h3>
+          <ul>
+            <li>All important data members in <code>ChargingStation</code> are declared <code>private</code>.</li>
+            <li>Access is given only through <strong>getters</strong> &amp; <strong>setters</strong>.</li>
+            <li>Example: <code>stationId</code>, <code>availablePower</code>, <code>ratePerKWh</code>,
+              <code>connectorStatuses</code>.</li>
+            <li><strong>Purpose:</strong> Data hiding &amp; controlled access.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-list"></i> 1.4 COLLECTIONS (ARRAYLIST)</h3>
+          <ul>
+            <li>Used <code>ArrayList&lt;String&gt; connectorStatuses</code> to maintain real-time status.</li>
+            <li>Initialized with <code>"Available"</code> for each connector.</li>
+            <li>On <code>occupyConnector()</code> -&gt; updated to <code>"Occupied"</code>.</li>
+            <li>On <code>releaseConnector()</code> -&gt; updated back to <code>"Available"</code>.</li>
+            <li><strong>Also shown:</strong> <code>trim()</code> &amp; <code>toUpperCase()</code> used to format Station
+              IDs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="part2" class="slide section dark">
+      <h2 class="section-title">PART 2 : INHERITANCE, ABSTRACTION, POLYMORPHISM, INTERFACE &amp; EXCEPTION HANDLING</h2>
+      <div class="part-grid">
+        <div class="part-card">
+          <h3><i class="fas fa-sitemap"></i> 2.1 INHERITANCE</h3>
+          <ul>
+            <li><code>FastChargingStation</code> extends <code>ChargingStation</code>.</li>
+            <li>Uses <code>super()</code> to call parent constructor.</li>
+            <li>Reuses <code>occupyConnector()</code>, <code>releaseConnector()</code>, <code>exportInvoice()</code>.
+            </li>
+            <li>Adds its own property - <code>fastChargingRate</code>.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-eye-slash"></i> 2.2 ABSTRACTION &amp; INTERFACE</h3>
+          <ul>
+            <li>Implemented <code>BillablePower</code> interface in <code>ChargingStation</code>.</li>
+            <li>Defines contract: <code>getRatePerKWh()</code>, <code>setRatePerKWh()</code>,
+              <code>calculateBill()</code>, <code>exportInvoice()</code>.</li>
+            <li>Hides "how billing works" and shows only "what is needed".</li>
+            <li>Normal rate - <strong>$12.50/kWh</strong>, Fast Charging rate - <strong>$18.00/kWh</strong>.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-shapes"></i> 2.3 POLYMORPHISM</h3>
+          <ul>
+            <li><strong>Method Overriding:</strong> <code>toString()</code> overridden in
+              <code>FastChargingStation</code>.</li>
+            <li><code>exportInvoice()</code> works with parent reference but executes based on object.</li>
+            <li>Same method name gives different behavior depending on object type.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-shield-alt"></i> 2.4 EXCEPTION HANDLING (CUSTOM EXCEPTIONS)</h3>
+          <ul>
+            <li><code>ConnectorInUseException</code> - Double-booking of same connector.</li>
+            <li><code>ConnectorOccupiedException</code> - Booking an already occupied connector.</li>
+            <li><code>ConnectorAvailableException</code> - Releasing an already available connector.</li>
+            <li><code>InvalidConnectorException</code> - Invalid connector index.</li>
+            <li><code>InvalidPowerException</code> - Power out of range.</li>
+            <li><code>InvalidChargingRateException</code> - Invalid fast charging rate.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="part3" class="slide section">
+      <h2 class="section-title">PART 3 : FILE I/O, MULTITHREADING, LAMBDA &amp; STREAMS</h2>
+      <div class="part-grid three-col">
+        <div class="part-card">
+          <h3><i class="fas fa-file-export"></i> 3.1 FILE I/O (INVOICE GENERATION)</h3>
+          <ul>
+            <li>Invoices are written to <code>charging_bills.txt</code> using <code>FileWriter</code>,
+              <code>BufferedWriter</code> &amp; <code>PrintWriter</code>.</li>
+            <li>Appended using <code>new FileWriter(file, true)</code>.</li>
+            <li>Stores Station ID, Connector ID, Energy Consumed, Tariff, Total Amount, Date &amp; Time.</li>
+            <li>Automatically exported on charging session completion.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-project-diagram"></i> 3.2 MULTITHREADING</h3>
+          <ul>
+            <li><code>ChargingSession</code> implements <code>Runnable</code>.</li>
+            <li>Background thread created using <code>new Thread(session).start()</code>.</li>
+            <li>Battery % updates every <strong>2 seconds</strong> using <code>Thread.sleep(2000)</code>.</li>
+            <li><strong>Normal:</strong> +10% per update | <strong>Fast:</strong> +20% per update.</li>
+            <li><code>thread.join()</code> used in <code>Main</code> to wait till completion.</li>
+          </ul>
+        </div>
+        <div class="part-card">
+          <h3><i class="fas fa-filter"></i> 3.3 LAMBDA EXPRESSION &amp; STREAMS</h3>
+          <ul>
+            <li>Collected all stations in <code>ArrayList&lt;ChargingStation&gt;</code>.</li>
+            <li>Used <code>stream().filter(station -&gt; station.getAvailablePower() &gt; 50.0f)</code> with Lambda.
+            </li>
+            <li>Filtered only stations having <strong>available power &gt; 50kW</strong>.</li>
+            <li>Displayed using <code>forEach()</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusion" class="slide section dark">
+      <span class="slide-tag">CONCLUSION</span>
+      <h2 class="section-title">CONCLUSION</h2>
+      <div class="conclusion-single">
+        <div class="con-card big">
+          <h3><i class="fas fa-check-double"></i> FINAL CONCLUSION</h3>
+          <p>We have successfully implemented the <strong>Electric Vehicle (EV) Charging Network System</strong> by
+            applying all the core Object Oriented Programming concepts. This project demonstrates how real-time problems
+            can be solved using <strong>Classes &amp; Objects, Encapsulation, Inheritance, Abstraction, Polymorphism,
+              Interface, Exception Handling, Collections, File I/O, Multithreading, Lambda Expressions &amp;
+              Streams</strong>. This system helps in managing EV charging in an efficient, organized and automated
+            manner.</p>
+        </div>
+      </div>
+      <div class="thankyou">
+        <h2>THANK YOU</h2>
+        <p>ANY QUERIES ?</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
