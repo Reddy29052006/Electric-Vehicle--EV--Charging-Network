@@ -12,14 +12,6 @@ public interface BillablePower {
 
     double calculateBill(double energyConsumedKWh);
 
-    void exportInvoice(String fileName, int connectorId, double energyConsumedKWh, double totalCost,
-                       LocalDateTime inTime, LocalDateTime outTime) throws IOException;
-
-    void exportInvoice(String fileName, int connectorId, double energyConsumedKWh, double totalCost)
-            throws IOException;
-
-    void exportInvoice(int connectorId, double energyConsumedKWh, LocalDateTime inTime, LocalDateTime outTime)
-            throws IOException;
-
-    void exportInvoice(int connectorId, double energyConsumedKWh) throws IOException;
+    void exportInvoice(int connectorId, double energyConsumedKWh, LocalDateTime inTime, LocalDateTime outTime,
+            String userName) throws IOException;
 }

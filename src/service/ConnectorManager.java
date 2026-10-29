@@ -1,18 +1,18 @@
 package src.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import src.exception.ConnectorAvailableException;
 import src.exception.ConnectorOccupiedException;
 import src.exception.InvalidConnectorException;
 
+import java.util.ArrayList;
+
 public class ConnectorManager {
-    private final List<Connector> connectors;
+    private final ArrayList<Connector> connectors;
 
     public ConnectorManager(int noOfConnectors) {
         connectors = new ArrayList<>(noOfConnectors);
-        for (int i = 0; i < noOfConnectors; i++) {
-            connectors.add(new Connector(i + 1));
+        for (int i = 1; i <= noOfConnectors; i++) {
+            connectors.add(new Connector(i));
         }
     }
 
@@ -26,27 +26,17 @@ public class ConnectorManager {
         connectors.get(index - 1).release();
     }
 
-    private void validateIndex(int index) throws InvalidConnectorException {
-        if (index < 1 || index > connectors.size()) {
-            throw new InvalidConnectorException("Invalid connector index: " + index);
-        }
-    }
-
-    public List<String> getConnectorStatuses() {
-        List<String> statuses = new ArrayList<>();
+    public ArrayList<String> getConnectorStatuses() {
+        ArrayList<String> statuses = new ArrayList<>();
         for (Connector connector : connectors) {
             statuses.add(connector.getStatus());
         }
         return statuses;
     }
 
-    public void displayConnectorStatus() {
-        for (Connector connector : connectors) {
-            System.out.println("Connector " + connector.getConnectorId() + ": " + connector.getStatus());
+    private void validateIndex(int index) throws InvalidConnectorException {
+        if (index < 1 || index > connectors.size()) {
+            throw new InvalidConnectorException("Invalid connector index: " + index);
         }
-    }
-
-    public int getConnectorCount() {
-        return connectors.size();
     }
 }

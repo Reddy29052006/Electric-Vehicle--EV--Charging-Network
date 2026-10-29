@@ -6,51 +6,28 @@ import java.time.LocalDateTime;
 public class ChargingSession implements Runnable {
     private final ChargingStation station;
     private final int connectorId;
-    private int batteryPercentage;
     private final int targetPercentage;
     private final double energyConsumedKWh;
     private final int chargeStep;
-    private LocalDateTime inTime;
-    private LocalDateTime outTime;
     private final String userName;
+    private int batteryPercentage;
 
-    public ChargingSession(ChargingStation station, int connectorId, int initialBatteryPercentage, int targetPercentage, double energyConsumedKWh) {
-        this(station, connectorId, initialBatteryPercentage, targetPercentage, energyConsumedKWh, null);
-    }
-
-    public ChargingSession(ChargingStation station, int connectorId, int initialBatteryPercentage, int targetPercentage, double energyConsumedKWh, String userName) {
+    public ChargingSession(ChargingStation station, int connectorId, int initialBatteryPercentage,
+            int targetPercentage, double energyConsumedKWh, String userName) {
         this.station = station;
         this.connectorId = connectorId;
         this.batteryPercentage = Math.max(0, Math.min(100, initialBatteryPercentage));
         this.targetPercentage = Math.max(this.batteryPercentage, Math.min(100, targetPercentage));
         this.energyConsumedKWh = energyConsumedKWh;
         this.userName = userName;
-        if (station instanceof FastChargingStation) {
-            this.chargeStep = 20;
-        } else {
-            this.chargeStep = 10;
-        }
-    }
-
-    private String getProgressBar(int percent) {
-        int bars = 20;
-        int filled = (percent * bars) / 100;
-        StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < bars; i++) {
-            if (i < filled) {
-                sb.append("#");
-            } else {
-                sb.append("-");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
+        this.chargeStep = (station instanceof FastChargingStation) ? 20 : 10;
     }
 
     @Override
     public void run() {
-        inTime = LocalDateTime.now();
-        System.out.printf("  Battery: %3d%% %s%n", batteryPercentage, getProgressBar(batteryPercentage));
+        LocalDateTime inTime = LocalDateTime.now();
+        printProgress();
+
         while (batteryPercentage < targetPercentage) {
             try {
                 Thread.sleep(2000);
@@ -59,38 +36,28 @@ public class ChargingSession implements Runnable {
                 return;
             }
             batteryPercentage = Math.min(targetPercentage, batteryPercentage + chargeStep);
-            if (batteryPercentage >= targetPercentage) {
-                System.out.printf("  Battery: %3d%% %s (Complete)%n", batteryPercentage, getProgressBar(batteryPercentage));
-                break;
-            } else {
-                System.out.printf("  Battery: %3d%% %s%n", batteryPercentage, getProgressBar(batteryPercentage));
-            }
+            printProgress();
         }
-        outTime = LocalDateTime.now();
+
+        LocalDateTime outTime = LocalDateTime.now();
         try {
-            station.exportInvoice(connectorId, energyConsumedKWh, inTime, outTime);
+            station.exportInvoice(connectorId, energyConsumedKWh, inTime, outTime, userName);
         } catch (IOException e) {
             System.err.println("Failed to export invoice: " + e.getMessage());
         }
     }
 
-    public LocalDateTime getInTime() {
-        return inTime;
+    private void printProgress() {
+        String status = batteryPercentage >= targetPercentage ? " (Complete)" : "";
+        System.out.printf("  Battery: %3d%% %s%s%n", batteryPercentage, getProgressBar(batteryPercentage), status);
     }
 
-    public LocalDateTime getOutTime() {
-        return outTime;
-    }
-
-    public int getBatteryPercentage() {
-        return batteryPercentage;
-    }
-
-    public ChargingStation getStation() {
-        return station;
-    }
-
-    public int getConnectorId() {
-        return connectorId;
+    private String getProgressBar(int percent) {
+        int filled = percent * 20 / 100;
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < 20; i++) {
+            bar.append(i < filled ? '#' : '-');
+        }
+        return bar.append(']').toString();
     }
 }
