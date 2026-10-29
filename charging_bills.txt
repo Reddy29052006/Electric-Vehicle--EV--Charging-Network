@@ -1,0 +1,70 @@
+============================================================
+                     EV CHARGING INVOICE                    
+============================================================
+User Name          : User1
+In-Time Timestamp  : 2026-10-29 09:11:01
+Out-Time Timestamp : 2026-10-29 09:11:07
+Station ID         : FAST-001
+Station Type       : FastChargingStation
+Connector ID       : 1
+Energy Consumed    : 24.00 kWh
+Tariff Rate        : Rs:18.00 / kWh
+Total Amount Due   : Rs:432.00
+============================================================
+
+============================================================
+                     EV CHARGING INVOICE
+============================================================
+User Name          : User1
+In-Time Timestamp  : 2026-10-29 09:17:02
+Out-Time Timestamp : 2026-10-29 09:17:08
+Station ID         : FAST-001
+Station Type       : FastChargingStation
+Connector ID       : 1
+Energy Consumed    : 24.00 kWh
+Tariff Rate        : Rs:18.00 / kWh
+Total Amount Due   : Rs:432.00
+============================================================
+
+============================================================
+                     EV CHARGING INVOICE                    
+============================================================
+User Name          : User1
+In-Time Timestamp  : 2026-10-29 09:17:44
+Out-Time Timestamp : 2026-10-29 09:17:50
+Station ID         : FAST-001
+Station Type       : FastChargingStation
+Connector ID       : 1
+Energy Consumed    : 24.00 kWh
+Tariff Rate        : Rs:18.00 / kWh
+Total Amount Due   : Rs:432.00
+============================================================
+
+============================================================
+                     EV CHARGING INVOICE                    
+============================================================
+User Name          : User1
+In-Time Timestamp  : 2026-10-29 09:18:19
+Out-Time Timestamp : 2026-10-29 09:18:25
+Station ID         : FAST-001
+Station Type       : FastChargingStation
+Connector ID       : 1
+Energy Consumed    : 24.00 kWh
+Tariff Rate        : Rs:18.00 / kWh
+Total Amount Due   : Rs:432.00
+============================================================
+
+============================================================
+                     EV CHARGING INVOICE                    
+============================================================
+User Name          : User1
+In-Time Timestamp  : 2026-10-29 09:19:19
+Out-Time Timestamp : 2026-10-29 09:19:25
+Station ID         : FAST-001
+Station Type       : FastChargingStation
+Connector ID       : 1
+Energy Consumed    : 24.00 kWh
+Tariff Rate        : Rs:18.00 / kWh
+Total Amount Due   : Rs:432.00
+============================================================
+
